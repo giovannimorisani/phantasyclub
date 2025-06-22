@@ -23,20 +23,23 @@
       z-index: -1;
     }
 
-    .logo {
+    .logo-centered {
       position: absolute;
-      top: 20px;
-      left: 30px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       z-index: 1;
+      text-align: center;
     }
 
-    .logo img {
-      height: 60px;
+    .logo-centered img {
+      height: 100px;
+      max-width: 80vw;
     }
 
     @media (max-width: 768px) {
-      .logo img {
-        height: 45px;
+      .logo-centered img {
+        height: 70px;
       }
     }
   </style>
@@ -52,8 +55,8 @@
     Il tuo browser non supporta il video HTML5.
   </video>
 
-  <!-- Logo -->
-  <div class="logo">
+  <!-- Logo centrato -->
+  <div class="logo-centered">
     <img src="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/logo.png" alt="Phantasy Club Logo" />
   </div>
 
