@@ -37,6 +37,17 @@
       max-width: 80vw;
     }
 
+    .footer {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      z-index: 1;
+      pointer-events: none;
+    }
+
     @media (max-width: 768px) {
       .logo-centered img {
         height: 35px;
@@ -48,9 +59,9 @@
 
   <!-- Video di sfondo con poster -->
   <video autoplay muted loop playsinline class="video-bg" poster="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/poster.jpg">
-    <!-- Mobile -->
+    <!-- Versione mobile -->
     <source src="https://cdn.shopify.com/videos/c/o/v/3c43f1541c1242109159e6d8cb39f4dd.mp4" media="(max-width: 768px)" type="video/mp4">
-    <!-- Desktop -->
+    <!-- Versione desktop -->
     <source src="https://cdn.shopify.com/videos/c/o/v/02784a38230c4965a673aa3f20913d96.mp4" type="video/mp4">
     Il tuo browser non supporta il video HTML5.
   </video>
@@ -59,6 +70,15 @@
   <div class="logo-centered">
     <img src="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/logo.png" alt="Phantasy Club Logo" />
   </div>
+
+  <!-- Footer minimale -->
+  <footer class="footer">
+    <p>
+      Phantasy Club – SLAM JAM S.R.L.<br>
+      Partita IVA: 01399030384<br>
+      Indirizzo: VIA FRANCESCO LUIGI FERRARI 37/A – 44122 – FERRARA (FE)
+    </p>
+  </footer>
 
 </body>
 </html>
