@@ -113,6 +113,53 @@
       background: rgba(255, 255, 255, 0.15);
     }
 
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 10px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .checkbox-container input[type="checkbox"]:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .checkbox-container input[type="checkbox"]::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      top: 2px;
+      left: 2px;
+      background-color: rgba(255, 255, 255, 0.6);
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.2s ease;
+    }
+
+    .checkbox-container input[type="checkbox"]:checked::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
     .social-links {
       position: absolute;
       bottom: 65px;
@@ -181,7 +228,10 @@
       <h3>join our newsletter</h3>
       <form id="newsletter-form">
         <input type="email" name="EMAIL" id="email" placeholder="your mail address" required />
-        <br />
+        <label class="checkbox-container">
+          <input type="checkbox" id="gdpr-consent" required />
+          I agree to receive the newsletter. Find out more about our Privacy Policy.
+        </label>
         <button type="submit">sign me up</button>
       </form>
       <div id="thank-you-message" style="display:none; color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 10px;">
@@ -236,16 +286,23 @@
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
+      const emailValue = inputEmail.value;
+      const gdprConsent = document.getElementById('gdpr-consent').checked;
+
       const res = await fetch('/.netlify/functions/subscribe', {
         method: 'POST',
-        body: JSON.stringify({ email: inputEmail.value }),
+        body: JSON.stringify({
+          email: emailValue,
+          gdpr: gdprConsent
+        }),
       });
       const data = await res.json();
       if (data.success) {
         form.style.display = 'none';
         thankYou.style.display = 'block';
       } else {
-        alert('There was a problem. Please try again.');
+        console.log(data);
+        alert(data.error || 'There was a problem. Please try again.');
       }
     });
   </script>
