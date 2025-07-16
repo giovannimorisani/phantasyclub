@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phantasy Club</title>
+  <link rel="icon" href="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+    }
+
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .logo-centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .logo-centered img {
+      height: 50px;
+      max-width: 80vw;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .newsletter-box {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 25px 35px;
+      border-radius: 10px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .newsletter-box h3 {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      font-weight: 200;
+      margin-bottom: 12px;
+    }
+
+    .newsletter-box input[type="email"] {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      font-weight: 200;
+      text-align: center;
+      outline: none;
+      margin-bottom: 12px;
+      width: 300px;
+      max-width: 80vw;
+    }
+
+    .newsletter-box input::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .newsletter-box button {
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+      border: none;
+      border-radius: 5px;
+      font-size: 13px;
+      font-weight: 200;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .newsletter-box button:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .thank-you {
+      display: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      font-weight: 200;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+
+    .thank-you.fade-out {
+      opacity: 0;
+    }
+
+    @media (max-width: 768px) {
+      .logo-centered img {
+        height: 35px;
+      }
+
+      .newsletter-box h3 {
+        font-size: 13px;
+      }
+
+      .newsletter-box input[type="email"] {
+        width: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video sfondo -->
+  <video autoplay muted loop playsinline class="video-bg" poster="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/poster.jpg">
+    <source src="https://cdn.shopify.com/videos/c/o/v/3c43f1541c1242109159e6d8cb39f4dd.mp4" media="(max-width: 768px)" type="video/mp4">
+    <source src="https://cdn.shopify.com/videos/c/o/v/02784a38230c4965a673aa3f20913d96.mp4" type="video/mp4">
+    Il tuo browser non supporta il video HTML5.
+  </video>
+
+  <!-- Logo cliccabile -->
+  <div class="logo-centered" onclick="toggleOverlay(true)">
+    <img src="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/last_logo_phantasy.png" alt="Phantasy Club Logo" />
+  </div>
+
+  <!-- Overlay newsletter -->
+  <div class="overlay" id="overlay" onclick="closeOnOutside(event)">
+    <div class="newsletter-box">
+      <h3 id="newsletter-title">join our newsletter</h3>
+      <form id="newsletter-form" onsubmit="return showThankYou(event)">
+        <input type="email" placeholder="your mail address" required />
+        <br />
+        <button type="submit">sign me up</button>
+      </form>
+      <div id="thank-you-message" class="thank-you">
+        thank you for joining our newsletter<br>
+        we're coming with some exciting news.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>
+      © Phantasy Club © Slam Jam S.r.l. UNIPERSONALE • 01399030384 • Via F.L Ferrari 37/a Ferrara 44122
+    </p>
+  </footer>
+
+  <script>
+    function toggleOverlay(show) {
+      const overlay = document.getElementById("overlay");
+      const form = document.getElementById("newsletter-form");
+      const title = document.getElementById("newsletter-title");
+      const thanks = document.getElementById("thank-you-message");
+
+      overlay.classList.toggle("active", show);
+      if (show) {
+        form.style.display = "block";
+        title.style.display = "block";
+        thanks.style.display = "none";
+        thanks.classList.remove("fade-out");
+      }
+    }
+
+    function closeOnOutside(e) {
+      if (e.target.id === "overlay") toggleOverlay(false);
+    }
+
+    function showThankYou(event) {
+      event.preventDefault();
+      const form = document.getElementById("newsletter-form");
+      const title = document.getElementById("newsletter-title");
+      const thanks = document.getElementById("thank-you-message");
+
+      form.style.display = "none";
+      title.style.display = "none";
+      thanks.style.display = "block";
+
+      setTimeout(() => thanks.classList.add("fade-out"), 4000);
+      setTimeout(() => toggleOverlay(false), 5000);
+
+      return false;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") toggleOverlay(false);
+    });
+  </script>
+
+</body>
+</html>
