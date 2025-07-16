@@ -5,29 +5,37 @@ exports.handler = async (event) => {
   const LIST_ID = 'a6c1980457';
   const DATACENTER = 'us6';
 
-  const response = await fetch(`https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members/`, {
-    method: 'POST',
-    headers: {
-      Authorization: `apikey ${API_KEY}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      email_address: email,
-      status: 'subscribed'
-    })
-  });
+  try {
+    const response = await fetch(`https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members/`, {
+      method: 'POST',
+      headers: {
+        Authorization: `apikey ${API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email_address: email,
+        status: 'subscribed'
+      })
+    });
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (response.status >= 400) {
+    if (response.status >= 400) {
+      console.log('Mailchimp response:', data);
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: data.detail || 'Unknown error' })
+      };
+    }
+
     return {
-      statusCode: 400,
-      body: JSON.stringify({ error: data.detail || 'Unknown error' })
+      statusCode: 200,
+      body: JSON.stringify({ success: true })
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message })
     };
   }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ success: true })
-  };
 };
