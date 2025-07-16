@@ -8,7 +8,7 @@ exports.handler = async (event) => {
   if (!API_KEY || !LIST_ID || !DATACENTER) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Missing Mailchimp configuration in ENV variables' })
+      body: JSON.stringify({ error: 'Missing Mailchimp ENV variables.' })
     };
   }
 
@@ -37,7 +37,7 @@ exports.handler = async (event) => {
       console.log('Mailchimp response:', data);
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: data.detail || 'Unknown error' })
+        body: JSON.stringify({ error: 'Error subscribing to newsletter.' })
       };
     }
 
@@ -49,7 +49,7 @@ exports.handler = async (event) => {
     console.log('Fetch failed:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Fetch to Mailchimp failed: ' + error.message })
+      body: JSON.stringify({ error: 'Fetch to Mailchimp failed.' })
     };
   }
 };
