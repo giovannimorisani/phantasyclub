@@ -1,12 +1,14 @@
-const fetch = require('node-fetch');
-
 exports.handler = async (event) => {
   const { email } = JSON.parse(event.body);
 
-  const response = await fetch('https://us6.api.mailchimp.com/3.0/lists/a6c1980457/members', {
+  const API_KEY = '4dca48b7b1177739416b4d959e88686a-us6';
+  const LIST_ID = 'a6c1980457';
+  const DATACENTER = 'us6';
+
+  const response = await fetch(`https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members/`, {
     method: 'POST',
     headers: {
-      Authorization: 'apikey 4dca48b7b1177739416b4d959e88686a-us6',
+      Authorization: `apikey ${API_KEY}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
@@ -15,10 +17,12 @@ exports.handler = async (event) => {
     })
   });
 
+  const data = await response.json();
+
   if (response.status >= 400) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Email could not be added to Mailchimp.' })
+      body: JSON.stringify({ error: data.detail || 'Unknown error' })
     };
   }
 
