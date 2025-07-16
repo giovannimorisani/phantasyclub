@@ -14,6 +14,7 @@
       overflow: hidden;
       font-family: 'Inter', sans-serif;
       font-weight: 200;
+      transition: all 0.6s ease;
     }
 
     .video-bg {
@@ -33,6 +34,7 @@
       transform: translate(-50%, -50%);
       z-index: 1;
       text-align: center;
+      cursor: pointer;
     }
 
     .logo-centered img {
@@ -129,6 +131,12 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      transition: all 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 300;
     }
 
     .social-links img {
@@ -137,28 +145,13 @@
       opacity: 0.6;
     }
 
-.social-links {
-  position: absolute;
-  bottom: 65px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  z-index: 1;
-}
+    .social-links a:hover img {
+      opacity: 0.8;
+    }
 
-.social-links a {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 12px;
-  text-decoration: none;
-  font-weight: 200;
-  transition: all 0.2s ease;
-}
-
-.social-links a:hover {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 300;
-}
+    body.inverted {
+      filter: invert(1) hue-rotate(180deg);
+    }
 
     @media (max-width: 768px) {
       .logo-centered img {
@@ -185,7 +178,7 @@
   </video>
 
   <!-- Logo statico -->
-  <div class="logo-centered">
+  <div class="logo-centered" id="logo">
     <img src="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/last_logo_phantasy.png" alt="Phantasy Club Logo" />
   </div>
 
@@ -214,6 +207,16 @@
       © Phantasy Club © Slam Jam S.r.l. UNIPERSONALE • 01399030384 • Via F.L Ferrari 37/a Ferrara 44122
     </p>
   </footer>
+
+  <script>
+    const logo = document.getElementById('logo');
+    logo.addEventListener('mouseenter', () => {
+      document.body.classList.add('inverted');
+    });
+    logo.addEventListener('mouseleave', () => {
+      document.body.classList.remove('inverted');
+    });
+  </script>
 
 </body>
 </html>
