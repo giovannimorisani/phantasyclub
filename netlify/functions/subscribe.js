@@ -5,6 +5,13 @@ exports.handler = async (event) => {
   const LIST_ID = process.env.MAILCHIMP_LIST_ID;
   const DATACENTER = process.env.MAILCHIMP_DC;
 
+  if (!API_KEY || !LIST_ID || !DATACENTER) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Missing Mailchimp configuration in ENV variables' })
+    };
+  }
+
   try {
     const response = await fetch(`https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members/`, {
       method: 'POST',
@@ -39,9 +46,10 @@ exports.handler = async (event) => {
       body: JSON.stringify({ success: true })
     };
   } catch (error) {
+    console.log('Fetch failed:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message })
+      body: JSON.stringify({ error: 'Fetch to Mailchimp failed: ' + error.message })
     };
   }
 };
