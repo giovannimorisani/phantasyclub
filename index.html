@@ -137,9 +137,28 @@
       opacity: 0.6;
     }
 
-    .social-links a:hover img {
-      opacity: 0.8;
-    }
+.social-links {
+  position: absolute;
+  bottom: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  z-index: 1;
+}
+
+.social-links a {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 200;
+  transition: all 0.2s ease;
+}
+
+.social-links a:hover {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+}
 
     @media (max-width: 768px) {
       .logo-centered img {
