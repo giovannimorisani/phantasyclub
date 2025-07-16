@@ -223,22 +223,22 @@
     <img src="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/last_logo_phantasy.png" alt="Phantasy Club Logo" />
   </div>
 
-<div class="newsletter-fixed">
-  <div class="newsletter-box">
-    <h3 id="newsletter-title">join our newsletter</h3>
-    <form id="newsletter-form">
-      <input type="email" name="EMAIL" id="email" placeholder="your mail address" required />
-      <label class="checkbox-container">
-        <input type="checkbox" id="gdpr-consent" required />
-        I agree to receive the newsletter. Find out more about our Privacy Policy.
-      </label>
-      <button type="submit">sign me up</button>
-    </form>
-    <div id="thank-you-message" style="display:none; color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 10px;">
-      thank you for joining our newsletter.
+  <div class="newsletter-fixed">
+    <div class="newsletter-box">
+      <h3 id="newsletter-title">join our newsletter</h3>
+      <form id="newsletter-form">
+        <input type="email" name="EMAIL" id="email" placeholder="your mail address" required />
+        <label class="checkbox-container">
+          <input type="checkbox" id="gdpr-consent" required />
+          I agree to receive the newsletter. Find out more about our Privacy Policy.
+        </label>
+        <button type="submit">sign me up</button>
+      </form>
+      <div id="thank-you-message" style="display:none; color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 10px;">
+        thank you for joining our newsletter.
+      </div>
     </div>
   </div>
-</div>
 
   <div class="social-links">
     <a href="mailto:info@phantasyclub.cc">send us an email</a>
@@ -298,11 +298,11 @@
       });
       const data = await res.json();
       if (data.success) {
+        document.getElementById('newsletter-title').style.display = 'none';
         form.style.display = 'none';
         thankYou.style.display = 'block';
       } else {
-        console.log(data);
-        alert(data.error || 'There was a problem. Please try again.');
+        // Nessun errore visibile lato utente.
       }
     });
   </script>
