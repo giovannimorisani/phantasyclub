@@ -24,7 +24,7 @@ exports.handler = async (event) => {
         status: 'subscribed',
         marketing_permissions: [
           {
-            marketing_permission_id: '77973',
+            marketing_permission_id: 'a37b9ae8aa',
             enabled: gdpr
           }
         ]
