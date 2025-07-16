@@ -124,7 +124,7 @@
     }
 
     .social-links a {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 12px;
       text-decoration: none;
       font-weight: 200;
@@ -136,17 +136,6 @@
 
     .social-links a:hover {
       color: rgba(255, 255, 255, 0.9);
-      font-weight: 300;
-    }
-
-    .social-links img {
-      width: 14px;
-      height: 14px;
-      opacity: 0.6;
-    }
-
-    .social-links a:hover img {
-      opacity: 0.8;
     }
 
     body.inverted {
@@ -154,8 +143,16 @@
     }
 
     @media (max-width: 768px) {
+      .logo-centered {
+        top: 35%;
+      }
+
       .logo-centered img {
         height: 35px;
+      }
+
+      .newsletter-fixed {
+        bottom: 150px;
       }
 
       .newsletter-box h3 {
@@ -170,51 +167,64 @@
 </head>
 <body>
 
-  <!-- Video sfondo -->
   <video autoplay muted loop playsinline class="video-bg" poster="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/poster.jpg">
     <source src="https://cdn.shopify.com/videos/c/o/v/3c43f1541c1242109159e6d8cb39f4dd.mp4" media="(max-width: 768px)" type="video/mp4">
     <source src="https://cdn.shopify.com/videos/c/o/v/02784a38230c4965a673aa3f20913d96.mp4" type="video/mp4">
-    Il tuo browser non supporta il video HTML5.
   </video>
 
-  <!-- Logo statico -->
   <div class="logo-centered" id="logo">
     <img src="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/last_logo_phantasy.png" alt="Phantasy Club Logo" />
   </div>
 
-  <!-- Newsletter -->
   <div class="newsletter-fixed">
     <div class="newsletter-box">
       <h3>join our newsletter</h3>
-      <form action="#" method="POST">
-        <input type="email" placeholder="your mail address" required />
+      <form action="https://phantasyclub.us6.list-manage.com/subscribe/post?u=dd52f1d0848a9e18581474094&amp;id=a6c1980457" method="POST" target="_blank" novalidate>
+        <input type="email" name="EMAIL" placeholder="your mail address" required />
         <br />
         <button type="submit">sign me up</button>
       </form>
     </div>
   </div>
 
-  <!-- Contact & Social -->
   <div class="social-links">
     <a href="mailto:info@phantasyclub.cc">send us an email</a>
     <a href="https://www.instagram.com/phantasy.cc" target="_blank">instagram</a>
     <a href="https://www.tiktok.com/@archivioslamjam" target="_blank">tiktok</a>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
-    <p>
-      © Phantasy Club © Slam Jam S.r.l. UNIPERSONALE • 01399030384 • Via F.L Ferrari 37/a Ferrara 44122
-    </p>
+    <p>© Phantasy Club © Slam Jam S.r.l. UNIPERSONALE • 01399030384 • Via F.L Ferrari 37/a Ferrara 44122</p>
   </footer>
 
   <script>
     const logo = document.getElementById('logo');
+    let inverted = false;
+
     logo.addEventListener('mouseenter', () => {
-      document.body.classList.add('inverted');
+      if (window.innerWidth > 768) {
+        document.body.classList.add('inverted');
+      }
     });
+
     logo.addEventListener('mouseleave', () => {
-      document.body.classList.remove('inverted');
+      if (window.innerWidth > 768) {
+        document.body.classList.remove('inverted');
+      }
+    });
+
+    logo.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        inverted = !inverted;
+        document.body.classList.toggle('inverted', inverted);
+      }
+    });
+
+    document.body.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && inverted && !e.target.closest('#logo')) {
+        document.body.classList.remove('inverted');
+        inverted = false;
+      }
     });
   </script>
 
