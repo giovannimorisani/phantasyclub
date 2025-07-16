@@ -1,5 +1,5 @@
 exports.handler = async (event) => {
-  const { email } = JSON.parse(event.body);
+  const { email, gdpr } = JSON.parse(event.body);
 
   const API_KEY = '4dca48b7b1177739416b4d959e88686a-us6';
   const LIST_ID = 'a6c1980457';
@@ -14,7 +14,13 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({
         email_address: email,
-        status: 'subscribed'
+        status: 'subscribed',
+        marketing_permissions: [
+          {
+            marketing_permission_id: '77973',
+            enabled: gdpr
+          }
+        ]
       })
     });
 
