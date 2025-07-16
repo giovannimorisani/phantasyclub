@@ -179,11 +179,14 @@
   <div class="newsletter-fixed">
     <div class="newsletter-box">
       <h3>join our newsletter</h3>
-      <form action="https://phantasyclub.us6.list-manage.com/subscribe/post?u=dd52f1d0848a9e18581474094&amp;id=a6c1980457" method="POST" target="_blank" novalidate>
-        <input type="email" name="EMAIL" placeholder="your mail address" required />
+      <form id="newsletter-form">
+        <input type="email" name="EMAIL" id="email" placeholder="your mail address" required />
         <br />
         <button type="submit">sign me up</button>
       </form>
+      <div id="thank-you-message" style="display:none; color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 10px;">
+        thank you for joining our newsletter.
+      </div>
     </div>
   </div>
 
@@ -224,6 +227,25 @@
       if (window.innerWidth <= 768 && inverted && !e.target.closest('#logo')) {
         document.body.classList.remove('inverted');
         inverted = false;
+      }
+    });
+
+    const form = document.getElementById('newsletter-form');
+    const thankYou = document.getElementById('thank-you-message');
+    const inputEmail = document.getElementById('email');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const res = await fetch('/.netlify/functions/subscribe', {
+        method: 'POST',
+        body: JSON.stringify({ email: inputEmail.value }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        form.style.display = 'none';
+        thankYou.style.display = 'block';
+      } else {
+        alert('There was a problem. Please try again.');
       }
     });
   </script>
