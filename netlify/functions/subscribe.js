@@ -1,7 +1,7 @@
 exports.handler = async (event) => {
   const { email, gdpr } = JSON.parse(event.body);
 
-  const API_KEY = '4dca48b7b1177739416b4d959e88686a-us6';
+  const API_KEY = '731f67a59f4e5cd1049a07129d0faef9-us6';
   const LIST_ID = 'a6c1980457';
   const DATACENTER = 'us6';
 
