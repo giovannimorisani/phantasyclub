@@ -33,7 +33,6 @@
       transform: translate(-50%, -50%);
       z-index: 1;
       text-align: center;
-      cursor: pointer;
     }
 
     .logo-centered img {
@@ -43,7 +42,7 @@
 
     .footer {
       position: absolute;
-      bottom: 15px;
+      bottom: 10px;
       width: 100%;
       text-align: center;
       font-size: 10px;
@@ -52,26 +51,18 @@
       pointer-events: none;
     }
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100vw;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-    }
-
-    .overlay.active {
+    .newsletter-fixed {
+      position: absolute;
+      bottom: 120px;
+      width: 100%;
       display: flex;
+      justify-content: center;
+      z-index: 1;
     }
 
     .newsletter-box {
       background: rgba(255, 255, 255, 0.02);
-      padding: 25px 35px;
+      padding: 20px 30px;
       border-radius: 10px;
       text-align: center;
       backdrop-filter: blur(8px);
@@ -81,7 +72,7 @@
       color: rgba(255, 255, 255, 0.6);
       font-size: 14px;
       font-weight: 200;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .newsletter-box input[type="email"] {
@@ -94,7 +85,7 @@
       font-weight: 200;
       text-align: center;
       outline: none;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       width: 300px;
       max-width: 80vw;
     }
@@ -113,23 +104,41 @@
       font-weight: 200;
       cursor: pointer;
       transition: background 0.2s ease;
+      margin-bottom: 0;
     }
 
     .newsletter-box button:hover {
       background: rgba(255, 255, 255, 0.15);
     }
 
-    .thank-you {
-      display: none;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 14px;
-      font-weight: 200;
-      opacity: 1;
-      transition: opacity 1s ease;
+    .social-links {
+      position: absolute;
+      bottom: 65px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 1;
     }
 
-    .thank-you.fade-out {
-      opacity: 0;
+    .social-links a {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 12px;
+      text-decoration: none;
+      font-weight: 200;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .social-links img {
+      width: 14px;
+      height: 14px;
+      opacity: 0.6;
+    }
+
+    .social-links a:hover img {
+      opacity: 0.8;
     }
 
     @media (max-width: 768px) {
@@ -156,25 +165,28 @@
     Il tuo browser non supporta il video HTML5.
   </video>
 
-  <!-- Logo cliccabile -->
-  <div class="logo-centered" onclick="toggleOverlay(true)">
+  <!-- Logo statico -->
+  <div class="logo-centered">
     <img src="https://cdn.shopify.com/s/files/1/0834/1979/1701/files/last_logo_phantasy.png" alt="Phantasy Club Logo" />
   </div>
 
-  <!-- Overlay newsletter -->
-  <div class="overlay" id="overlay" onclick="closeOnOutside(event)">
+  <!-- Newsletter -->
+  <div class="newsletter-fixed">
     <div class="newsletter-box">
-      <h3 id="newsletter-title">join our newsletter</h3>
-      <form id="newsletter-form" onsubmit="return showThankYou(event)">
+      <h3>join our newsletter</h3>
+      <form action="#" method="POST">
         <input type="email" placeholder="your mail address" required />
         <br />
         <button type="submit">sign me up</button>
       </form>
-      <div id="thank-you-message" class="thank-you">
-        thank you for joining our newsletter<br>
-        we're coming with some exciting news.
-      </div>
     </div>
+  </div>
+
+  <!-- Contact & Social -->
+  <div class="social-links">
+    <a href="mailto:info@phantasyclub.cc">send us an email</a>
+    <a href="https://www.instagram.com/phantasy.cc" target="_blank">instagram</a>
+    <a href="https://www.tiktok.com/@archivioslamjam" target="_blank">tiktok</a>
   </div>
 
   <!-- Footer -->
@@ -183,47 +195,6 @@
       © Phantasy Club © Slam Jam S.r.l. UNIPERSONALE • 01399030384 • Via F.L Ferrari 37/a Ferrara 44122
     </p>
   </footer>
-
-  <script>
-    function toggleOverlay(show) {
-      const overlay = document.getElementById("overlay");
-      const form = document.getElementById("newsletter-form");
-      const title = document.getElementById("newsletter-title");
-      const thanks = document.getElementById("thank-you-message");
-
-      overlay.classList.toggle("active", show);
-      if (show) {
-        form.style.display = "block";
-        title.style.display = "block";
-        thanks.style.display = "none";
-        thanks.classList.remove("fade-out");
-      }
-    }
-
-    function closeOnOutside(e) {
-      if (e.target.id === "overlay") toggleOverlay(false);
-    }
-
-    function showThankYou(event) {
-      event.preventDefault();
-      const form = document.getElementById("newsletter-form");
-      const title = document.getElementById("newsletter-title");
-      const thanks = document.getElementById("thank-you-message");
-
-      form.style.display = "none";
-      title.style.display = "none";
-      thanks.style.display = "block";
-
-      setTimeout(() => thanks.classList.add("fade-out"), 4000);
-      setTimeout(() => toggleOverlay(false), 5000);
-
-      return false;
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === "Escape") toggleOverlay(false);
-    });
-  </script>
 
 </body>
 </html>
