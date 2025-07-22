@@ -11,10 +11,14 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
       font-family: 'Inter', sans-serif;
       font-weight: 200;
       transition: all 0.6s ease;
+      overflow-x: hidden;
     }
 
     .video-bg {
@@ -28,11 +32,8 @@
     }
 
     .logo-centered {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1;
+      margin-top: auto;
+      margin-bottom: auto;
       text-align: center;
       cursor: pointer;
     }
@@ -42,23 +43,11 @@
       max-width: 80vw;
     }
 
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 10px;
-      color: rgba(255, 255, 255, 0.6);
-      z-index: 1;
-      pointer-events: none;
-    }
-
     .newsletter-fixed {
-      position: absolute;
-      bottom: 200px;
-      width: 100%;
+      margin-bottom: 120px;
       display: flex;
       justify-content: center;
+      width: 100%;
       z-index: 1;
     }
 
@@ -172,9 +161,7 @@
     }
 
     .social-links {
-      position: absolute;
-      bottom: 100px;
-      width: 100%;
+      margin-bottom: 50px;
       display: flex;
       justify-content: center;
       gap: 20px;
@@ -196,6 +183,17 @@
       filter: invert(1) hue-rotate(180deg);
     }
 
+    .footer {
+      position: relative;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      z-index: 1;
+      pointer-events: none;
+      margin-bottom: 10px;
+    }
+
     @media (max-width: 768px) {
       .logo-centered {
         top: 30%;
@@ -206,7 +204,7 @@
       }
 
       .newsletter-fixed {
-        bottom: 140px;
+        margin-bottom: 100px;
       }
 
       .newsletter-box h3 {
@@ -215,6 +213,10 @@
 
       .newsletter-box input[type="email"] {
         width: 220px;
+      }
+
+      .social-links {
+        margin-bottom: 80px;
       }
     }
   </style>
