@@ -197,12 +197,16 @@
     }
 
     @media (max-width: 768px) {
+      .logo-centered {
+        top: 30%;
+      }
+
       .logo-centered img {
         height: 105px;
       }
 
       .newsletter-fixed {
-        bottom: 200px;
+        bottom: 140px;
       }
 
       .newsletter-box h3 {
@@ -307,7 +311,6 @@
       }
     });
 
-    // Inversion effect on social links for full page
     const links = document.querySelectorAll('.social-links a');
     links.forEach(link => {
       link.addEventListener('mouseenter', () => {
