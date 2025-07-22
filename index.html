@@ -55,7 +55,7 @@
 
     .newsletter-fixed {
       position: absolute;
-      bottom: 120px;
+      bottom: 200px;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -63,12 +63,22 @@
     }
 
     .newsletter-box {
+      position: relative;
       background: rgba(255, 255, 255, 0.02);
       padding: 14px 20px;
       max-width: 300px;
-      border-radius: 10px;
+      border-radius: 12px;
       text-align: center;
       backdrop-filter: blur(8px);
+      overflow: hidden;
+      z-index: 1;
+      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+    }
+
+    .newsletter-box h3, .newsletter-box form, .newsletter-box #thank-you-message {
+      position: relative;
+      z-index: 1;
     }
 
     .newsletter-box h3 {
@@ -180,11 +190,6 @@
       align-items: center;
       gap: 5px;
       transition: all 0.3s ease;
-      font-size: 12px;
-    }
-
-    .social-links a:hover {
-      filter: invert(1) hue-rotate(180deg);
     }
 
     body.inverted {
@@ -197,7 +202,7 @@
       }
 
       .newsletter-fixed {
-        bottom: 150px;
+        bottom: 200px;
       }
 
       .newsletter-box h3 {
@@ -300,6 +305,17 @@
         form.style.display = 'none';
         thankYou.style.display = 'block';
       }
+    });
+
+    // Inversion effect on social links for full page
+    const links = document.querySelectorAll('.social-links a');
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        document.body.classList.add('inverted');
+      });
+      link.addEventListener('mouseleave', () => {
+        document.body.classList.remove('inverted');
+      });
     });
   </script>
 
