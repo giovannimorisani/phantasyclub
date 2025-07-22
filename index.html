@@ -38,7 +38,7 @@
     }
 
     .logo-centered img {
-      height: 50px;
+      height: 150px;
       max-width: 80vw;
     }
 
@@ -64,7 +64,8 @@
 
     .newsletter-box {
       background: rgba(255, 255, 255, 0.02);
-      padding: 20px 30px;
+      padding: 14px 20px;
+      max-width: 300px;
       border-radius: 10px;
       text-align: center;
       backdrop-filter: blur(8px);
@@ -88,7 +89,7 @@
       text-align: center;
       outline: none;
       margin-bottom: 10px;
-      width: 300px;
+      width: 220px;
       max-width: 80vw;
     }
 
@@ -162,7 +163,7 @@
 
     .social-links {
       position: absolute;
-      bottom: 65px;
+      bottom: 100px;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -178,11 +179,12 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
+      font-size: 12px;
     }
 
     .social-links a:hover {
-      color: rgba(255, 255, 255, 0.9);
+      filter: invert(1) hue-rotate(180deg);
     }
 
     body.inverted {
@@ -190,12 +192,8 @@
     }
 
     @media (max-width: 768px) {
-      .logo-centered {
-        top: 35%;
-      }
-
       .logo-centered img {
-        height: 35px;
+        height: 105px;
       }
 
       .newsletter-fixed {
@@ -207,7 +205,7 @@
       }
 
       .newsletter-box input[type="email"] {
-        width: 240px;
+        width: 220px;
       }
     }
   </style>
@@ -301,8 +299,6 @@
         document.getElementById('newsletter-title').style.display = 'none';
         form.style.display = 'none';
         thankYou.style.display = 'block';
-      } else {
-        // Nessun errore visibile lato utente.
       }
     });
   </script>
